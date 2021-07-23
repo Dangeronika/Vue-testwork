@@ -1,7 +1,7 @@
 <template>
   <div>
       <ul>
-        <Todotask v-for="todo in todos" :key="todo" :todo='todo'
+        <Todotask v-for="task in tasks" :key="task" :task='task'
         v-on:remove-todo="remove"> </Todotask>
       </ul>
   </div>
@@ -13,7 +13,7 @@ export default {
   components: {
     Todotask,
   },
-  props: ['todos'],
+  props: ['tasks'],
   methods: {
     remove(id) {
       this.$emit('remove-todo', id)

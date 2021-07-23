@@ -1,12 +1,12 @@
 <template>
   <div>
     <li>
-      <span :class="{checked: todo.completed}">
-        <input type="checkbox" v-on:change="todo.completed = !todo.completed">
-        <strong>{{todo.id}}</strong>
-        {{todo.title}}
+      <span :class="{checked: task.completed}">
+        <input type="checkbox" v-on:change="task.completed = !task.completed">
+        <strong>{{task.id}}</strong>
+        {{task.title}}
       </span>
-      <button v-on:click="$emit('remove-todo', todo.id)">&times;</button>
+      <button v-on:click="$emit('remove-todo', task.id)">&times;</button>
     </li>
   </div>
 </template>
@@ -14,7 +14,7 @@
 <script>
 export default {
   props: {
-    todo: {
+    task: {
       type: Object,
       requred: true,
     }

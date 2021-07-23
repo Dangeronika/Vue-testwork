@@ -2,7 +2,7 @@
   <div id="app">
     <Todohead/>
     <AddTodotask v-on:add-todo='addTodo'/>
-    <Todolist :todos = 'todos' class="list"
+    <Todolist :tasks = 'tasks' class="list"
     @remove-todo='remove'/>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
   name: "App",
   data() {
     return {
-      todos: [
+      tasks: [
         {id: 1, title: 'ananas', completed:false},
         {id: 2, title: 'abrikos', completed:false},
         {id: 3, title: 'arbuz', completed:false},
@@ -30,10 +30,10 @@ export default {
   },
   methods: {
     remove(id) {
-      this.todos = this.todos.filter( t => t.id !==id)
+      this.tasks = this.tasks.filter( t => t.id !==id)
     },
     addTodo(newTodo) {
-      this.todos.push(newTodo)
+      this.tasks.push(newTodo)
     }
   }
 };
