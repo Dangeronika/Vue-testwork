@@ -3,7 +3,9 @@
     <Todohead/>
     <AddTodotask v-on:add-todo='addTodo'/>
     <Todolist :tasks = 'tasks' class="list"
+    v-if="tasks.length"
     @remove-todo='remove'/>
+    <p v-else> No tasks! </p>
   </div>
 </template>
 

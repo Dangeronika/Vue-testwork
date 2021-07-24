@@ -1,7 +1,9 @@
 <template>
   <div>
       <ul>
-        <Todotask v-for="task in tasks" :key="task" :task='task'
+        <Todotask v-for="(task, index) in tasks" :key="task" 
+        :task='task'
+        :index='index'
         v-on:remove-todo="remove"> </Todotask>
       </ul>
   </div>
