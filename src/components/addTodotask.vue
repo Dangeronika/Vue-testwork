@@ -17,7 +17,8 @@ export default {
         let newTodo = {
           id: Date.now(),
           title: this.taskName,
-          completed: false
+          completed: false,
+          rename: false,
         }
         this.$emit('add-todo', newTodo);
         this.title = ''

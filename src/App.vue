@@ -19,9 +19,7 @@ export default {
   data() {
     return {
       tasks: [
-        {id: 1, title: 'ananas', completed:false},
-        {id: 2, title: 'abrikos', completed:false},
-        {id: 3, title: 'arbuz', completed:false},
+        {id: 1, title: 'ananas', completed:false, rename:false},   
       ],
     }
   },
