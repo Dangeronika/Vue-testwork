@@ -19,7 +19,6 @@ export default {
   data() {
     return {
       tasks: [
-        {id: 1, title: 'ananas', completed:false, rename:false},   
       ],
     }
   },

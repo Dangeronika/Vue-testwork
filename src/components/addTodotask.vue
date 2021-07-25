@@ -21,7 +21,7 @@ export default {
           rename: false,
         }
         this.$emit('add-todo', newTodo);
-        this.title = ''
+        this.taskName = ''
       }
     }
   }
