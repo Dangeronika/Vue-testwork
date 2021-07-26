@@ -11,12 +11,12 @@
         :class="{usable: !task.rename}">
         <button class="rename-but" 
         v-on:click ="edit(), hidder()" 
-        :class="{usable: !task.rename}"><img src="@/assets/accepted.png" class="img" alt="">
+        :class="{usable: !task.rename}"><img src="~@/assets/accepted.png" class="img" alt="">
         </button>
 
         <button class="rename-but" 
         v-on:click ="hidder()" 
-        :class="{usable: task.rename}" ><img src="@/assets/pencil-pen.png" class="img" alt="">
+        :class="{usable: task.rename}" ><img src="~@/assets/pencil-pen.png" class="img" alt="">
         </button>
 
         <button class="rename-but" 
