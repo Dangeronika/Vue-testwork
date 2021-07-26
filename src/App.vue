@@ -18,9 +18,15 @@ export default {
   name: "App",
   data() {
     return {
-      tasks: [
+      tasks: [ 
+        {id: 1, title: 'Make a todo list', completed:false, rename: false},
+        {id: 2, title: 'Refactor the code', completed:false, rename: false},
+        {id: 3, title: 'Done the work', completed:false, rename: false}
       ],
     }
+  },
+  mounted() {
+    this.getTasks();
   },
   components: {
     Todohead,
@@ -33,8 +39,21 @@ export default {
     },
     addTodo(newTodo) {
       this.tasks.push(newTodo)
+    },
+    getTasks() {
+      if (localStorage.getItem('tasks')) {
+        this.tasks = JSON.parse(localStorage.getItem('tasks'));
+      }
     }
-  }
+  },
+  watch: {
+    tasks: {
+      handler: function(updateTasks) {
+        localStorage.setItem('tasks', JSON.stringify(updateTasks));
+      },
+      deep:true
+    }
+  },
 };
 </script>
 
