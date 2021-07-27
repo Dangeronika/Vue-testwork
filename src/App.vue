@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       tasks: [ 
-        {id: 1, title: 'Make a todo list', completed:false, rename: false},
+        {id: 1, title: 'Make a todo list', completed:false, rename: false, checkbox_clicked: false},
         {id: 2, title: 'Refactor the code', completed:false, rename: false},
         {id: 3, title: 'Done the work', completed:false, rename: false}
       ],

@@ -2,7 +2,7 @@
   <div>
     <li :class="{completed: task.completed}">
       <span :class="{checked: task.completed}">
-        <input type="checkbox" v-on:change ="completer()">
+        <input type="checkbox" v-bind:checked="task.checkbox_clicked" v-on:change ="completer(), clicker()">
         <strong>{{index+1}}</strong>
         {{task.title}}
       </span>
@@ -30,10 +30,7 @@
 <script>
 export default {
   props: {
-    task: {
-      type: Object,
-      requred: true,
-    },
+    task: {},
     index: Number,
   },
   data() {
@@ -51,6 +48,9 @@ export default {
     },
     completer: function() {
       this.task.completed = !this.task.completed;
+    },
+    clicker: function() {
+      this.task.checkbox_clicked = !this.task.checkbox_clicked
     }
   }
 }
@@ -92,5 +92,8 @@ span{
 }
 input{
   margin-right: 15px;
+}
+.checkbox_clicked{
+   
 }
 </style>

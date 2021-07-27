@@ -1,8 +1,13 @@
 <template>
+<div class="manyways">
   <form v-on:submit.prevent = "onSubmit">
     <input type="text" v-model="taskName">
     <button type="submit">Create</button>
   </form>
+  <form v-on:submit.prevent = "search">
+    <button type="submit">Search</button>
+  </form>
+</div>
 </template>
 
 <script>
@@ -26,3 +31,11 @@ export default {
     }
   }
 </script>
+
+<style>
+
+.manyways{
+  display: flex;
+  justify-content: center;
+}
+</style>
