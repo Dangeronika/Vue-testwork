@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Todohead/>
-    <AddTodotask v-on:add-todo='addTodo'/>
+    <AddTodotask v-on:add-todo='addTodo' v-on:search-task="searchTask"/>
     <Todolist :tasks = 'tasks' class="list"
     v-if="tasks.length"
     @remove-todo='remove'/>
@@ -20,9 +20,11 @@ export default {
     return {
       tasks: [ 
         {id: 1, title: 'Make a todo list', completed:false, rename: false, checkbox_clicked: false},
-        {id: 2, title: 'Refactor the code', completed:false, rename: false},
-        {id: 3, title: 'Done the work', completed:false, rename: false}
+        {id: 2, title: 'Refactor the code', completed:false, rename: false, checkbox_clicked: false},
+        {id: 3, title: 'Done the work', completed:false, rename: false, checkbox_clicked: false}
       ],
+      search_flag: true,
+      copyTasks: null,
     }
   },
   mounted() {
@@ -35,10 +37,24 @@ export default {
   },
   methods: {
     remove(id) {
-      this.tasks = this.tasks.filter( t => t.id !==id)
+      this.tasks = this.tasks.filter( t => t.id !==id )
     },
     addTodo(newTodo) {
-      this.tasks.push(newTodo)
+      this.tasks.push(newTodo);
+    },
+    searchTask(taskName) {
+
+      if(this.search_flag) {
+        this.copyTasks = this.tasks.slice()
+        this.search_flag = false;
+      }
+
+      if(taskName !=''){
+        this.tasks = this.tasks.filter( t => t.title == taskName);
+      } else {
+        this.tasks = this.copyTasks.slice();
+        this.search_flag = true;
+      }
     },
     getTasks() {
       if (localStorage.getItem('tasks')) {

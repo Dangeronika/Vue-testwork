@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{viewed: task.checked}">
     <li :class="{completed: task.completed}">
       <span :class="{checked: task.completed}">
         <input type="checkbox" v-bind:checked="task.checkbox_clicked" v-on:change ="completer(), clicker()">
@@ -93,7 +93,7 @@ span{
 input{
   margin-right: 15px;
 }
-.checkbox_clicked{
-   
+.viewed{
+  visibility:  hidden;
 }
 </style>

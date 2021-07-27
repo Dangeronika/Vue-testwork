@@ -4,7 +4,8 @@
         <Todotask v-for="(task, index) in tasks" :key="task" 
         :task='task'
         :index='index'
-        v-on:remove-todo="remove"> </Todotask>
+        v-on:remove-todo="remove">
+        </Todotask>
       </ul>
   </div>
 </template>

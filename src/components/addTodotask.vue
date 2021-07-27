@@ -4,9 +4,7 @@
     <input type="text" v-model="taskName">
     <button type="submit">Create</button>
   </form>
-  <form v-on:submit.prevent = "search">
-    <button type="submit">Search</button>
-  </form>
+    <button type="submit" v-on:click="$emit('search-task', taskName)">Search</button>
 </div>
 </template>
 
@@ -18,16 +16,17 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
+      onSubmit() {
         let newTodo = {
           id: Date.now(),
           title: this.taskName,
           completed: false,
           rename: false,
+          checkbox_clicked: false,
         }
         this.$emit('add-todo', newTodo);
         this.taskName = ''
-      }
+      },
     }
   }
 </script>
