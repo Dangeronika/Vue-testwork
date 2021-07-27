@@ -54,6 +54,7 @@ export default {
       } else {
         this.tasks = this.copyTasks.slice();
         this.search_flag = true;
+        this.copyTasks = null;
       }
     },
     getTasks() {
