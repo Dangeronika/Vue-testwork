@@ -10,12 +10,12 @@
         <input type="text" v-model="renameDescription"
           :class="{usable: !task.rename}">
         <button class="rename-but" 
-          v-on:click ="$emit('rename-task', renameDescription, index), hidder()"
+          v-on:click =" hider(), $emit('rename-task', renameDescription, index)"
           :class="{usable: !task.rename}"><img src="~@/assets/accepted.png" class="img" alt="">
         </button>
 
         <button class="rename-but" 
-          v-on:click ="hidder()"
+          v-on:click ="hider()"
           :class="{usable: task.rename}" ><img src="~@/assets/pencil-pen.png" class="img" alt="">
         </button>
 
@@ -43,7 +43,7 @@ export default {
       this.task.title = this.renameDescription;
       this.renameDescription = '';
     },
-    hidder: function() {
+    hider: function() {
       this.task.rename = !this.task.rename;
     },
     completer: function() {
