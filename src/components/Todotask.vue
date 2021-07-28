@@ -8,19 +8,19 @@
       </span>
       <div class="buttons">
         <input type="text" v-model="renameDescription"
-        :class="{usable: !task.rename}">
+          :class="{usable: !task.rename}">
         <button class="rename-but" 
-        v-on:click ="edit(), hidder()" 
-        :class="{usable: !task.rename}"><img src="~@/assets/accepted.png" class="img" alt="">
+          v-on:click ="$emit('rename-task', renameDescription, index), hidder()"
+          :class="{usable: !task.rename}"><img src="~@/assets/accepted.png" class="img" alt="">
         </button>
 
         <button class="rename-but" 
-        v-on:click ="hidder()" 
-        :class="{usable: task.rename}" ><img src="~@/assets/pencil-pen.png" class="img" alt="">
+          v-on:click ="hidder()"
+          :class="{usable: task.rename}" ><img src="~@/assets/pencil-pen.png" class="img" alt="">
         </button>
 
         <button class="rename-but" 
-        v-on:click ="$emit('remove-todo', task.id)">&times;
+          v-on:click ="$emit('remove-todo', task.id)">&times;
         </button>
       </div>
     </li>
@@ -30,7 +30,7 @@
 <script>
 export default {
   props: {
-    task: {},
+    task: Object,
     index: Number,
   },
   data() {

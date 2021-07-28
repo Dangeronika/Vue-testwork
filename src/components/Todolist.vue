@@ -1,10 +1,12 @@
 <template>
   <div>
       <ul>
-        <Todotask v-for="(task, index) in tasks" :key="task" 
-        :task='task'
-        :index='index'
-        v-on:remove-todo="remove">
+        <Todotask
+            v-for="(task, index) in tasks" :key="task"
+            :task='task'
+            :index='index'
+            v-on:remove-todo="remove"
+            v-on:rename-task="rename">
         </Todotask>
       </ul>
   </div>
@@ -18,8 +20,11 @@ export default {
   },
   props: ['tasks'],
   methods: {
-    remove(id) {
+    remove(id){
       this.$emit('remove-todo', id)
+    },
+    rename(description, id){
+      this.$emit('rename', description, id)
     }
   }
 

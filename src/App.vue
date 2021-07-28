@@ -1,11 +1,26 @@
 <template>
   <div id="app">
     <Todohead/>
-    <AddTodotask v-on:add-todo='addTodo' v-on:search-task="searchTask"/>
-    <Todolist :tasks = 'tasks' class="list"
-    v-if="tasks.length"
-    @remove-todo='remove'/>
-    <p v-else> No tasks! </p>
+    <AddTodotask
+        v-on:add-todo='addTodo'
+        v-on:set-local="setTasks"
+        :search="searchStroke"
+        @inputChange="searchStroke = $event"
+    />
+    <Todolist
+        :tasks = 'filterTasks'
+        class="list"
+        v-if="searchStroke!=''"
+        @remove-todo='remove'
+        v-on:rename="rename"
+    />
+    <Todolist
+        :tasks = 'tasks'
+        class="list"
+        v-else
+        @remove-todo='remove'
+        v-on:rename="rename"
+    />
   </div>
 </template>
 
@@ -19,12 +34,11 @@ export default {
   data() {
     return {
       tasks: [ 
-        {id: 1, title: 'Make a todo list', completed:false, rename: false, checkbox_clicked: false},
-        {id: 2, title: 'Refactor the code', completed:false, rename: false, checkbox_clicked: false},
-        {id: 3, title: 'Done the work', completed:false, rename: false, checkbox_clicked: false}
+        {id: 0, title: 'Make a todo list', completed:false, rename: false, checkbox_clicked: false},
+        {id: 1, title: 'Refactor the code', completed:false, rename: false, checkbox_clicked: false},
+        {id: 2, title: 'Done the work', completed:false, rename: false, checkbox_clicked: false}
       ],
-      search_flag: true,
-      copyTasks: null,
+      searchStroke: '',
     }
   },
   mounted() {
@@ -35,41 +49,32 @@ export default {
     Todolist,
     AddTodotask,
   },
+  computed: {
+    filterTasks() {
+      return this.tasks.filter(t => t.title.includes(this.searchStroke))
+    }
+  },
   methods: {
-    remove(id) {
-      this.tasks = this.tasks.filter( t => t.id !==id )
+    remove(id){
+      this.tasks = this.tasks.filter( t => t.id !==id );
+      this.setTasks();
     },
-    addTodo(newTodo) {
+    rename(description, id){
+      this.tasks[id].title = description;
+      this.setTasks();
+    },
+    addTodo(newTodo){
       this.tasks.push(newTodo);
+      this.setTasks();
     },
-    searchTask(taskName) {
-
-      if(this.search_flag) {
-        this.copyTasks = this.tasks.slice()
-        this.search_flag = false;
-      }
-
-      if(taskName !=''){
-        this.tasks = this.tasks.filter( t => t.title == taskName);
-      } else {
-        this.tasks = this.copyTasks.slice();
-        this.search_flag = true;
-        this.copyTasks = null;
-      }
+    setTasks(){
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
     },
-    getTasks() {
-      if (localStorage.getItem('tasks')) {
+    getTasks(){
+      if (localStorage.getItem('tasks')){
         this.tasks = JSON.parse(localStorage.getItem('tasks'));
       }
     },
-  },
-  watch: {
-    tasks: {
-      handler: function(updateTasks) {
-        localStorage.setItem('tasks', JSON.stringify(updateTasks));
-      },
-      deep:true
-    }
   },
 };
 </script>

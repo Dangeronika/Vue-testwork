@@ -1,10 +1,10 @@
 <template>
-<div class="manyways">
-  <form v-on:submit.prevent = "onSubmit">
+<div>
+  <form class="manyways" v-on:submit.prevent = "onSubmit">
     <input type="text" v-model="taskName">
     <button type="submit">Create</button>
   </form>
-    <button type="submit" v-on:click="$emit('search-task', taskName)">Search</button>
+    <input :value="search" @input="$emit('inputChange', $event.target.value)">
 </div>
 </template>
 
@@ -14,6 +14,9 @@ export default {
     return {
         taskName: ''
     }
+  },
+  props: {
+    search: String,
   },
   methods: {
       onSubmit() {
@@ -27,7 +30,7 @@ export default {
         this.$emit('add-todo', newTodo);
         this.taskName = ''
       },
-    }
+    },
   }
 </script>
 
