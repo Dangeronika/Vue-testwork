@@ -13,6 +13,7 @@
         v-if="filterTasks.length"
         @remove-todo='remove'
         v-on:rename="rename"
+        @savecondition="savecondition"
     />
     <p v-else>No tasks!</p>
   </div>
@@ -74,6 +75,10 @@ export default {
         this.tasks = JSON.parse(localStorage.getItem('tasks'));
       }
     },
+    savecondition(id) {
+      this.tasks[id].checkbox_clicked = !this.tasks[id].checkbox_clicked;
+      this.setTasks();
+    }
   },
 };
 </script>

@@ -2,7 +2,7 @@
   <div :class="{viewed: task.checked}">
     <li :class="{completed: task.completed}">
       <span :class="{checked: task.completed}">
-        <input type="checkbox" v-bind:checked="task.checkbox_clicked" v-on:change ="completer(), clicker()">
+        <input type="checkbox" v-bind:checked="task.checkbox_clicked" v-on:change ="completer(), $emit('chbxchange', index)">
         <strong>{{index+1}}</strong>
         {{task.title}}
       </span>
@@ -39,19 +39,13 @@ export default {
     }
   },
   methods: {
-    edit: function() {
-      this.task.title = this.renameDescription;
-      this.renameDescription = '';
-    },
+
     hider: function() {
       this.task.rename = !this.task.rename;
     },
     completer: function() {
       this.task.completed = !this.task.completed;
     },
-    clicker: function() {
-      this.task.checkbox_clicked = !this.task.checkbox_clicked
-    }
   }
 }
 </script>

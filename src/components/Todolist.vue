@@ -6,7 +6,8 @@
             :task='task'
             :index='index'
             v-on:remove-todo="remove"
-            v-on:rename-task="rename">
+            v-on:rename-task="rename"
+            @chbxchange="savecondition">
         </Todotask>
       </ul>
   </div>
@@ -25,6 +26,9 @@ export default {
     },
     rename(description, id){
       this.$emit('rename', description, id)
+    },
+    savecondition(id) {
+      this.$emit('savecondition', id)
     }
   }
 
