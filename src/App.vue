@@ -10,17 +10,11 @@
     <Todolist
         :tasks = 'filterTasks'
         class="list"
-        v-if="searchStroke!=''"
+        v-if="filterTasks.length"
         @remove-todo='remove'
         v-on:rename="rename"
     />
-    <Todolist
-        :tasks = 'tasks'
-        class="list"
-        v-else
-        @remove-todo='remove'
-        v-on:rename="rename"
-    />
+    <p v-else>No tasks!</p>
   </div>
 </template>
 
@@ -51,7 +45,12 @@ export default {
   },
   computed: {
     filterTasks() {
-      return this.tasks.filter(t => t.title.includes(this.searchStroke))
+      if (this.searchStroke !== ''){
+        return this.tasks.filter(t => t.title.includes(this.searchStroke))
+      }
+      else{
+        return this.tasks
+      }
     }
   },
   methods: {
